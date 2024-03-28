@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Card Game</title>
+    <link rel="stylesheet" href="./style.css">
+    <script  defer src="app.js"></script>
+</head>
+<body>
+    <div class="game-container">
+        <div class="grid-container" id="gridContainer"></div>
+        <div class="status-container">
+            <span>Time: <span id="time">0:00</span></span>
+        </div>
+        <div id="livesContainer">❤️❤️❤️❤️❤️</div>
+        <button id="restartBtn">Restart Game</button>
+    </div>
+
+    <div class="cardTypeSelection" id="cardTypeSelection">
+        <h1>Select card type to start</h1>
+        <button id="lettersBtn">Letters (hard)</button>
+        <button id="shapesBtn">Shapes (easy)</button>
+    </div>
+</body>
+</html>

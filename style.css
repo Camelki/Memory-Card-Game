@@ -1,0 +1,96 @@
+#livesContainer{
+    color: red;
+    display: flex;
+    gap: 5px;
+}
+
+.game-container{
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px color( rgb(0, 0, 0));
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.card{
+    width: 100%;
+    height: 100px;
+    background-color: #3498db;
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    display: flex;;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#lettersBtn{
+    background-color: red;
+    color: white;
+    border: none;
+}
+
+#shapesBtn{
+    background-color: rgb(228, 195, 3);
+    color: white;
+    border: none;
+
+}
+
+#shapesBtn:hover {
+    transform: scale(1.1); 
+  }
+
+#lettersBtn:hover {
+    transform: scale(1.1); 
+}
+.cardTypeSelection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 999; 
+    padding: 20px;
+    color: white;
+}
+
+#restartBtn{
+    color: white;
+    background-color: #3498db;
+    border: none;
+    margin-left: 43%;
+}
+#restartBtn:hover {
+    transform: scale(1.1); 
+}
+
+.card-back {
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: #3498db; 
+color: white; 
+font-size: 20px;
+}
+
+.card-image {
+    width: 100px; 
+    height: 100px; 
+    object-fit: cover; 
+}
+
