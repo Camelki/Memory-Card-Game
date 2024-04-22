@@ -4,6 +4,53 @@
     gap: 5px;
 }
 
+h1 {
+    font-size: 48px; 
+    font-weight: bold; 
+    color: #ffffff; 
+    text-align: center; 
+    margin-bottom: 30px; 
+    text-transform: uppercase; 
+    position: relative; 
+}
+
+h1::before {
+    content: ""; 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    width: 100%; 
+    height: 5px; 
+    background: linear-gradient(to right, #4CAF50, #FFD700, #3498db); 
+    animation: glow 2s linear infinite; 
+    transform: translateY(-50%); 
+}
+
+@keyframes glow {
+    0% { left: -100%; } 
+    100% { left: 100%; } 
+}
+
+h1 span {
+    display: inline-block;
+    position: relative; 
+}
+
+h1 span::after {
+    content: attr(data-content);
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    color: #333; 
+    overflow: hidden; 
+    animation: animate-text 4s linear infinite; 
+}
+
+@keyframes animate-text {
+    0% { width: 0; } 
+    100% { width: 100%; } 
+}
+
 .game-container{
     max-width: 800px;
     margin: 20px auto;
@@ -43,15 +90,18 @@
     background-color: rgb(228, 195, 3);
     color: white;
     border: none;
-
 }
 
 #shapesBtn:hover {
     transform: scale(1.1); 
+background-color: #3498db; 
+  
   }
 
 #lettersBtn:hover {
     transform: scale(1.1); 
+background-color: #3498db; 
+
 }
 .cardTypeSelection {
     display: flex;
@@ -77,6 +127,7 @@
 }
 #restartBtn:hover {
     transform: scale(1.1); 
+    background-color: yellow;
 }
 
 .card-back {
@@ -93,4 +144,33 @@ font-size: 20px;
     height: 100px; 
     object-fit: cover; 
 }
+.message-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+#messageContainer {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 500px;
+}
+
+.custom-button {
+    background-color: rgba(0, 0, 0, 0); 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    margin-left: 15px;
+    text-align: center; 
+    display: inline-block; 
+    font-size: 16px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+}
+
+.custom-button:hover {
+ background-color: #3498db; 
+}

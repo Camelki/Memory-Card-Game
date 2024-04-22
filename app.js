@@ -156,6 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
         renderCards();
         rebindCardListeners(); 
     }
+
     function rebindCardListeners() {
         gridContainer.querySelectorAll('.card').forEach(cardElement => {
             const cardIndex = cardElement.dataset.index;
@@ -168,6 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function startTimer() {
     if (gameStarted && !timerRunning) {  
+        timeElapsed = 0; 
         timerRunning = true;
         timerInterval = setInterval(() => {
             timeElapsed++;
@@ -190,16 +192,72 @@ function startTimer() {
 
 
 function endGame(win) {
+    console.log('endGame called with win =', win);
     stopTimer(); 
-
+    let difficulty = gameMode === 'letters' ? 'hard' : 'easy';
     let message = win
-        ? `Congratulations! You completed the game in ${timeElapsed} seconds with ${lives} lives left.`
-        : 'Sorry, you lost. Try again!';
+        ? `Congratulations! You completed the ${difficulty} ${gameMode === 'letters' ? 'letters' : 'shapes'} game in ${timeElapsed} seconds with ${lives} lives left.`
+        : `Sorry, you lost. Try again in ${difficulty} ${gameMode === 'letters' ? 'letters' : 'shapes'} mode!`;     
+        const messageContainer = document.getElementById('messageContainer');
+        const messageText = document.getElementById('messageText');
+        const closeMessageBtn = document.getElementById('closeMessageBtn');
+    
+        messageContainer.style.display = 'block';
 
-    alert(message);
+        const cardTypeSelection = document.getElementById('cardTypeSelection');
+        if (win) {
+            console.log('Displaying cardTypeSelection...');
+            cardTypeSelection.style.display = 'block';
+        } else {
+            cardTypeSelection.style.display = 'block';
+        }
+
+    const gameResult = {
+        win: win,
+        time: timeElapsed,
+        lives: lives,
+        mode: gameMode,
+    };
+
+    const gameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    gameHistory.push(gameResult);
+
+    localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+
+    displayGameHistory();
+}
+
+
+function deleteGameResult(index) {
+    const gameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    gameHistory.splice(index, 1); 
+    localStorage.setItem('gameHistory', JSON.stringify(gameHistory)); 
+    displayGameHistory(); 
+}
+
+    
+function displayGameHistory() {
+    const gameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
+    const messageContainer = document.getElementById('messageContainer');
+    messageContainer.innerHTML = ''; 
+
+    gameHistory.forEach((result, index) => {
+        const resultElement = document.createElement('div');
+        resultElement.className = 'message-content';
+        resultElement.style.backgroundColor = result.win ? '#4CAF50' : '#FF0000';
+        resultElement.textContent = `Game ${result.mode === 'shapes' ? 'Easy' : 'Hard'}: ${result.win ? 'Win' : 'Lost'} - Time: ${result.time} seconds - Remaining lives: ${result.lives}`;
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.classList.add('custom-button');
+        deleteBtn.onclick = function() {
+            deleteGameResult(index);
+        };
+        resultElement.appendChild(deleteBtn);
+
+        messageContainer.appendChild(resultElement);
+    });
 }
     
-
 function resetGame() {
     startTimer(); 
     timeElapsed = 0;
@@ -214,20 +272,37 @@ function resetGame() {
 }
 
 lettersBtn.addEventListener('click', function() {
+    startTimer(); 
+    timeElapsed = 0;
+    matchesFound = 0;
+    lives = 5;
+    updateLivesDisplay();
+    flippedCards = [];
+    generateCards();
+    shuffleCards();
+    renderCards();
+    timeDisplay.textContent = '0:00';
     gameMode = 'letters'; 
     gameStarted = true; 
     initGame('letters'); 
     cardTypeSelection.style.display = 'none'; 
-    startTimer(); 
 });
 
 shapesBtn.addEventListener('click', function() {
+    startTimer(); 
+    timeElapsed = 0;
+    matchesFound = 0;
+    lives = 5;
+    updateLivesDisplay();
+    flippedCards = [];
+    generateCards();
+    shuffleCards();
+    renderCards();
+    timeDisplay.textContent = '0:00';
     gameMode = 'shapes'; 
     gameStarted = true; 
     initGame('shapes'); 
     cardTypeSelection.style.display = 'none'; 
-    startTimer(); 
-
 });
 
 restartBtn.addEventListener('click', resetGame);
