@@ -9,3 +9,5 @@ Hard - 8 letters - effectively 16 cards.
 If two identical cards are chosen, they will remain visible. If two different cards are chosen, it will count as a failure and the player will lose hearts.
 
 During the game, the time for that game will appear, and when the game ends (loss/win), a message will pop up with the game data (win/loss, game time, remaining hearts).
+
+Save the data of the last games played in localStorage show them on opening screen + delete option for single game.
